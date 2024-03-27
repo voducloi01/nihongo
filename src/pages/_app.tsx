@@ -1,5 +1,6 @@
 import { store } from '@/stores'
 import { Provider } from 'react-redux'
+import '@/css/index.scss'
 
 
 export default function App({ Component, pageProps }: { Component: any; pageProps: any }) {
