@@ -2,8 +2,8 @@ import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/t
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import { createWrapper } from 'next-redux-wrapper'
 //import { encryptTransform } from 'redux-persist-transform-encrypt';
-import storage from 'redux-persist/lib/storage'
 import counterReducer, { CounterType } from '@/stores/slices/counter'
+import storage from '@/lib/noopStorage'
 
 export interface RootStatesType {
   counter: CounterType
