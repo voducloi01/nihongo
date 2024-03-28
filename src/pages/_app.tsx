@@ -1,12 +1,15 @@
-import { wrapper } from '@/stores'
-import '@/css/index.scss'
 import { ConfigProvider } from 'antd'
-import theme from '@/utils/themeConfig'
-import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
+import { wrapper } from '@/stores'
+import theme from '@/utils/themeConfig'
+import { AppProps } from 'next/app'
+import usePersistor from '@/lib/persistConfig'
+import '@/css/index.scss'
 
 const App = ({ Component, ...rest }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(rest)
+  usePersistor(store)
+
   return (
     <Provider store={store}>
       <ConfigProvider theme={theme} />
@@ -14,4 +17,5 @@ const App = ({ Component, ...rest }: AppProps) => {
     </Provider>
   )
 }
+
 export default App

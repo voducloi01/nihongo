@@ -21,13 +21,20 @@ const Index = ({ data }: { data: User[] }) => {
   return (
     <main>
       <div>
-        <label>{count.value}</label>
-        <Button onClick={() => dispatch(increment(1))} />
-        <button onClick={() => dispatch(decrement(1))}>--</button>
-        <button onClick={() => dispatch(resetCount())}>reset</button>
+        <h1>Number: {count.value}</h1>
+        <br />
+        <Button type="primary" onClick={() => dispatch(increment(1))}>
+          ++
+        </Button>
+        <Button type="primary" onClick={() => dispatch(decrement(1))}>
+          --
+        </Button>
+        <Button type="primary" onClick={() => dispatch(resetCount())}>
+          reset
+        </Button>
         <div>
           {data.map((item) => {
-            return <h1 key={item.id}>{item.name}</h1>
+            return <h3 key={item.id}>{item.name}</h3>
           })}
         </div>
       </div>

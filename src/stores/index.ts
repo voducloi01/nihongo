@@ -1,5 +1,5 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import { createWrapper } from 'next-redux-wrapper'
 //import { encryptTransform } from 'redux-persist-transform-encrypt';
 import storage from 'redux-persist/lib/storage'
@@ -50,8 +50,7 @@ const store = () =>
       }),
   })
 
-/* A function that takes a store as an argument and returns a persisted store. */
-export const persistor = persistStore(store())
+/* Export type a store with the wrapper global app */
 export type AppStore = ReturnType<typeof store>
 export type AppState = ReturnType<AppStore['getState']>
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action>
