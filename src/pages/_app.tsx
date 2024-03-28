@@ -1,18 +1,17 @@
-import { store } from '@/stores'
-import { Provider } from 'react-redux'
+import { wrapper } from '@/stores'
 import '@/css/index.scss'
+import { ConfigProvider } from 'antd'
+import theme from '@/utils/themeConfig'
+import type { AppProps } from 'next/app'
+import { Provider } from 'react-redux'
 
-
-export default function App({ Component, pageProps }: { Component: any; pageProps: any }) {
-  const page = (
-    <>
-      <Component {...pageProps} />
-    </>
+const App = ({ Component, ...rest }: AppProps) => {
+  const { store, props } = wrapper.useWrappedStore(rest)
+  return (
+    <Provider store={store}>
+      <ConfigProvider theme={theme} />
+      <Component {...props.pageProps} />
+    </Provider>
   )
-
-  if (Component.getLayout) {
-    return <Provider store={store}>Component.getLayout(page)</Provider>
-  }
-
-  return <Provider store={store}>{page}</Provider>
 }
+export default App

@@ -1,5 +1,6 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import { createWrapper } from 'next-redux-wrapper'
 //import { encryptTransform } from 'redux-persist-transform-encrypt';
 import storage from 'redux-persist/lib/storage'
 import counterReducer, { CounterType } from '@/stores/slices/counter'
@@ -28,7 +29,7 @@ const persistConfig = {
   key: ROOT_KEY,
   version: 1,
   storage,
-  whitelist: ['user', 'scale', 'language'],
+  whitelist: ['counter'],
   // transforms: [encryptor],
 }
 
@@ -38,15 +39,20 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 /* Creating a store with the persisted reducer. */
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-})
+const store = () =>
+  configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+  })
 
 /* A function that takes a store as an argument and returns a persisted store. */
-export const persistor = persistStore(store)
+export const persistor = persistStore(store())
+export type AppStore = ReturnType<typeof store>
+export type AppState = ReturnType<AppStore['getState']>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action>
+export const wrapper = createWrapper<AppStore>(store)
