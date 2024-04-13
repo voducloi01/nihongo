@@ -28,13 +28,13 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontEnd
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: ls -a
+      - run: |
+          pwd
+          ls -a
 
   # deploy:
   #   runs-on: ubuntu-latest
