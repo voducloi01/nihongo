@@ -32,7 +32,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: ls -a
+      - run: |
+          pwd
+          ls -a
 
   # deploy:
   #   runs-on: ubuntu-latest
