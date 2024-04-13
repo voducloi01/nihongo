@@ -29,6 +29,7 @@ jobs:
     environment: production
     steps:
       - name: Checkout code
+        uses: actions/checkout@v4
 
   deploy:
     name: Loi CI
@@ -36,4 +37,4 @@ jobs:
     environment: production
     steps:
       - name: Checkout code
-     
+        uses: actions/checkout@v4
