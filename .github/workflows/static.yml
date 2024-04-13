@@ -24,17 +24,15 @@ permissions:
 jobs:
   # Single deploy job since we're just deploying
   build:
-    name: Loi CI
+    name: Build
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
   deploy:
-    name: Loi CI
     runs-on: ubuntu-latest
-    environment: production
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
