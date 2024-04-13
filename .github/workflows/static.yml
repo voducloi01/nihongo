@@ -36,10 +36,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: latest
-      - run: npm i
-      - run: |
-          pwd
-          ls -a
+      - name: Install npm
+        run: npm i
+      - name: build
+        run: npm run build
+      - name: catch
+        run: cat out
+          
+
           
 
   # deploy:
