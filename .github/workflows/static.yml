@@ -32,9 +32,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
       - run: |
           pwd
           ls -a
+          node -v
 
   # deploy:
   #   runs-on: ubuntu-latest
