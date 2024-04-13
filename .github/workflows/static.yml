@@ -26,12 +26,14 @@ jobs:
   build:
     name: Loi CI
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Checkout code
 
   deploy:
     name: Loi CI
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Checkout code
      
